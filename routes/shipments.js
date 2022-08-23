@@ -6,6 +6,8 @@ const router = new express.Router();
 const jsonschema = require("jsonschema");
 const orderSchema = (".../schemas/orderSchema.json");
 
+const {BadRequestError} = require("../expressError")
+
 const { shipProduct } = require("../shipItApi");
 
 /** POST /ship
@@ -17,16 +19,17 @@ const { shipProduct } = require("../shipItApi");
  */
 
 router.post("/", async function (req, res, next) {
-  const { productId, name, addr, zip } = req.body;
-  const shipId = await shipProduct({ productId, name, addr, zip });
-
+  // const { productId, name, addr, zip } = req.body;
+  // const shipId = await shipProduct({ productId, name, addr, zip });
 
   const result = jsonschema.validate(req.body, orderSchema, {required:true});
 
   if (result.valid){
+    const shipId = await shipProduct(req.body);
     return res.json({ shipped: shipId });
   } else {
-
+    const errs= result.errors.map(err => err.stack);
+    throw new BadRequestError(errs);
   }
 });
 
