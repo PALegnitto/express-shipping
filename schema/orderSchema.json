@@ -1,0 +1,25 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://our.company.com/order.schema.json",
+    "title": "Shipping order",
+    "description": "ACME products shipping orders",
+    "type": "object",
+    "properties": {
+      "productId": {
+        "type": "integer"
+      },
+      "name": {
+        "type": "string"
+      },
+      "addr": {"type": "string"},
+      "zipcode": {"type": "string"},
+      },
+
+    "additionalProperties": false,
+    "required": [
+      "productId",
+      "name",
+      "addr",
+      "zipcode"
+    ]
+  }
