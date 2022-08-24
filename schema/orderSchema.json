@@ -10,16 +10,22 @@
       },
       "name": {
         "type": "string"
+
       },
-      "addr": {"type": "string"},
-      "zipcode": {"type": "string"},
+      "addr":{
+        "type": "string"
       },
+
+      "zip": {
+        "type": "string"
+      }
+    },
 
     "additionalProperties": false,
     "required": [
       "productId",
       "name",
       "addr",
-      "zipcode"
+      "zip"
     ]
   }
